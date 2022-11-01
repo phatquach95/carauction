@@ -1,0 +1,88 @@
+<template>
+  <lightning-card title="Advanced Search">
+    <div class="search-container">
+      <lightning-input
+        type="text"
+        name="plateNumber"
+        value={plateNumber}
+        placeholder="Plate Number"
+        onchange={handleFieldChange}
+        class="slds-lightning-input flex-item slds-m-left_x-small"
+      ></lightning-input>
+      <lightning-input
+        type="text"
+        name="brand"
+        value={brand}
+        placeholder="Brand"
+        onchange={handleFieldChange}
+        class="slds-lightning-input flex-item slds-m-left_x-small"
+      ></lightning-input>
+      <lightning-input
+        type="text"
+        name="model"
+        value={model}
+        placeholder="Model"
+        onchange={handleFieldChange}
+        class="slds-lightning-input flex-item slds-m-left_x-small slds-m-right_x-small"
+      ></lightning-input>
+      <div class="break-column"></div>
+      <lightning-combobox
+        name="body"
+        placeholder="Body"
+        value={body}
+        options={bodyPicklistValues}
+        onchange={handleFieldChange}
+        class="flex-item-big slds-m-left_x-small"
+      >
+      </lightning-combobox>
+      <lightning-combobox
+        name="fuelType"
+        placeholder="Fuel Type"
+        value={fuelType}
+        options={fuelTypePicklistValues}
+        onchange={handleFieldChange}
+        class="flex-item-big slds-m-left_x-small"
+      >
+      </lightning-combobox>
+      <lightning-combobox
+        name="numSeat"
+        placeholder="Number of Seats"
+        value={numSeat}
+        options={numSeatPicklistValues}
+        onchange={handleFieldChange}
+        class="flex-item-small slds-m-left_x-small"
+      >
+      </lightning-combobox>
+      <div class="slds-grid flex-item-big slds-m-left_x-small slds-m-right_x-small">
+        <lightning-input
+          type="date"
+          name="boughtDateFrom"
+          value={boughtDateFrom}
+          placeholder="Bought Date From"
+          onchange={handleFieldChange}
+          class="slds-lightning-input slds-col slds-m-right_x-small"
+        ></lightning-input>
+        <lightning-input
+          type="date"
+          name="boughtDateTo"
+          value={boughtDateTo}
+          placeholder="Bought Date To"
+          onchange={handleFieldChange}
+          class="slds-lightning-input slds-col"
+        ></lightning-input>
+      </div>
+    </div>
+    <div class="slds-p-around_x-small slds-align_absolute-center slds-m-top_xx-small">
+      <lightning-button
+        variant="brand"
+        label="Search"
+        onclick={handleAdvancedSearch}
+      ></lightning-button>
+      <lightning-button
+        label="Reset"
+        onclick={handleReset}
+        class="slds-m-left_x-small"
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>

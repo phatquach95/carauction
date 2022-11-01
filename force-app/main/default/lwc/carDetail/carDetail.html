@@ -1,0 +1,78 @@
+<template>
+  <lightning-card
+    variant="Narrow"
+    title="Car Detail"
+    icon-name="standard:drafts"
+  >
+    <p class="slds-p-horizontal_small">
+      <template if:true={car}>
+        <lightning-record-view-form
+        record-id={carId}
+        object-api-name="Car__c"
+        if:false={isEditing}>
+
+        <div class="slds-box">
+          <lightning-output-field field-name="Id"></lightning-output-field>
+          <lightning-output-field field-name="Plate_No__c"></lightning-output-field>
+          <lightning-output-field field-name="Brand__c"></lightning-output-field>
+          <lightning-output-field field-name="Model__c"></lightning-output-field>
+          <lightning-output-field field-name="Body__c"></lightning-output-field>
+          <lightning-output-field field-name="Fuel_Type__c"></lightning-output-field>
+          <lightning-output-field
+            field-name="Number_of_Seats__c"
+          ></lightning-output-field>
+          <!-- <lightning-output-field field-name="Kilometers__c"></lightning-output-field> -->
+          <lightning-output-field
+            field-name="Bought_Date__c"
+          ></lightning-output-field>
+        </div>
+    </lightning-record-view-form>
+
+        <lightning-record-edit-form if:true={isEditing} object-api-name="Car__c" record-id={carId} 
+                                    onsuccess={handleSuccessEdit} onerror={handleError}>
+          <lightning-input-field field-name="Plate_No__c"></lightning-input-field>
+          <lightning-input-field field-name="Brand__c"></lightning-input-field>
+          <lightning-input-field field-name="Model__c"></lightning-input-field>
+          <lightning-input-field field-name="Body__c"></lightning-input-field>
+          <lightning-input-field field-name="Fuel_Type__c"></lightning-input-field>
+          <lightning-input-field
+            field-name="Number_of_Seats__c"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Bought_Date__c"
+          ></lightning-input-field>
+            <div class="slds-var-m-top_medium slds-align_absolute-center">
+              <lightning-button label="Save" type="submit" 
+                                variant="success" icon-name="utility:save">
+              </lightning-button>
+              <lightning-button class="slds-m-left_x-small" onclick={toggleEdit}
+                            icon-name="utility:cancel_file_request" label="Cancel">
+              </lightning-button>
+            </div>
+        </lightning-record-edit-form>
+
+        <div class="slds-align_absolute-center slds-m-top_x-small" if:false={isEditing}>
+          <lightning-button onclick={toggleEdit} label="Edit" 
+                            variant="brand" icon-name="utility:settings">
+          </lightning-button>
+
+          <lightning-button class="slds-m-left_x-small" onclick={handleDelete} variant="destructive" 
+                            aria-haspopup="modal" label="Delete"
+                            icon-name="utility:delete"></lightning-button>
+        </div>
+        
+      </template>
+      <template if:false={car}>
+        <div class="slds-text-heading_medium slds-align_absolute-center">
+          Select a car to view details
+        </div>
+      </template>
+      <template if:true={loading}>
+        <div class="slds-card__body slds-card__body_inner">
+          <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+      </template>
+    </p>
+  </lightning-card>
+  
+</template>

@@ -1,0 +1,52 @@
+<template>
+  <div class="wrapper slds-grid slds-no-flex">
+    <header class="header">Car Management</header>
+
+    <article class="slds-card">
+      <div class="slds-card__header slds-grid">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+          <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+              <span>Cars</span>
+            </h2>
+          </div>
+          <div class="slds-no-flex">
+            <button
+              class="slds-button slds-button_neutral"
+              onclick={handleToggleList}
+              disabled={toggleList}
+            >
+              List
+            </button>
+            <button
+              class="slds-button slds-button_neutral"
+              onclick={handleToggleCreate}
+              disabled={toggleCreate}
+            >
+              New
+            </button>
+          </div>
+        </header>
+      </div>
+    </article>
+
+    <section class="content">
+      <div class="columns">
+        <main class="slds-col slds-size_8-of-12">
+          <div if:true={toggleList}>
+            <c-list-car oncarselected={handleCarSelected}></c-list-car>
+          </div>
+          <div if:true={toggleCreate}>
+            <c-create-car selected-room-id={selectedRoomId} starting-price={startingPrice}></c-create-car>
+          </div>
+        </main>
+        <aside if:false={toggleCreate} class="slds-col slds-size_4-of-12">
+          <c-car-detail car-id={selectedCarId} ></c-car-detail>
+        </aside>
+        <aside if:true={toggleCreate} class="slds-col slds-size_4-of-12">
+          <c-auction-room-list onroomselected={handleRoomSelected} oninputprice={handleInputPrice}></c-auction-room-list>
+        </aside>
+      </div>
+    </section>
+  </div>
+</template>

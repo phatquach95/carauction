@@ -1,0 +1,50 @@
+<template>
+    <div class="wrapper slds-grid slds-no-flex">
+      <header class="header">Auction Room Management</header>
+  
+      <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__body">
+              <h2 class="slds-card__header-title">
+                <span>Auction Rooms</span>
+              </h2>
+            </div>
+            <div class="slds-no-flex">
+              <button
+                class="slds-button slds-button_neutral"
+                onclick={handleToggleList}
+                disabled={toggleList}
+              >
+                List
+              </button>
+              <button
+                class="slds-button slds-button_neutral"
+                onclick={handleToggleCreate}
+                disabled={toggleCreate}
+              >
+                New
+              </button>
+            </div>
+          </header>
+        </div>
+      </article>
+  
+      <section class="content">
+        <div class="columns">
+          <main class="slds-col slds-size_8-of-12">
+            <div if:true={toggleList}>
+              <c-auction-room-home-list onroomselected={handleRoomSelected}></c-auction-room-home-list>
+            </div>
+            <div if:true={toggleCreate}>
+              <c-create-room selected-room-id={selectedRoomId}></c-create-room>
+            </div>
+          </main>
+          <aside if:false={toggleCreate} class="slds-col slds-size_4-of-12">
+            <c-room-detail room-id={selectedRoomId} ></c-room-detail>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </template>
+  

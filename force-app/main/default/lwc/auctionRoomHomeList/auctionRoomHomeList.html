@@ -1,0 +1,35 @@
+<template>
+    <div class="container">
+      <template if:true={auctionRooms}>
+   
+        <lightning-datatable
+          key-field="Id"
+          columns={columns}
+          data={recordsToDisplay}
+          max-row-selection="1"
+          onrowselection={handleSelectRoom}
+          onsort={handleSort}
+          sorted-by={sortedField}
+          sorted-direction={sortDirection}
+        >
+        </lightning-datatable>
+        
+        <div if:false={isEmptyRoom} class="slds-var-m-vertical_medium">
+          <c-pagination records={auctionRooms} onpagination={handlePagination}>
+          </c-pagination>
+        </div>
+      </template>
+      <template if:true={isEmptyRoom}>
+        <div class="slds-text-heading_large slds-align_absolute-center">
+            404 Auction Room Not Found.
+        </div>
+      </template>
+      <template if:true={loading}>
+        <div class="slds-card__body">
+          <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+      </template>
+    </div>
+    
+  </template>
+  

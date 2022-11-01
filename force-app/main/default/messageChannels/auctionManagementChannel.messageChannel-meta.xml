@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <masterLabel>auctionManagementChannel</masterLabel>
+	
+    <isExposed>true</isExposed>
+	
+    <description>Auction Management Channel.</description>
+	
+    <lightningMessageFields>
+        <fieldName>carId</fieldName>
+        <description>Car ID</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>roomId</fieldName>
+        <description>Room ID</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>auctionSlot</fieldName>
+        <description>Slot ID</description>
+    </lightningMessageFields>
+
+	
+</LightningMessageChannel>

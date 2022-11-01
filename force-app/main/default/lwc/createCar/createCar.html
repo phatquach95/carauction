@@ -1,0 +1,31 @@
+<template>
+  <lightning-card>
+    <lightning-record-edit-form
+      object-api-name="Car__c"
+      onsuccess={handleSuccess}
+      onerror={handleError}
+    >
+      <lightning-input-field field-name="Plate_No__c"></lightning-input-field>
+      <lightning-input-field field-name="Brand__c"></lightning-input-field>
+      <lightning-input-field field-name="Model__c"></lightning-input-field>
+      <lightning-input-field field-name="Body__c"></lightning-input-field>
+      <lightning-input-field field-name="Fuel_Type__c"></lightning-input-field>
+      <lightning-input-field
+        field-name="Number_of_Seats__c"
+      ></lightning-input-field>
+      <lightning-input-field
+        field-name="Bought_Date__c"
+      ></lightning-input-field>
+
+      <div class="slds-align_absolute-center">
+        <lightning-button
+          icon-name="utility:download"
+          variant="success"
+          type="submit"
+          label="Save"
+        >
+        </lightning-button>
+      </div>
+    </lightning-record-edit-form>
+  </lightning-card>
+</template>

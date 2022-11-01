@@ -1,0 +1,55 @@
+<template>
+  <div class="container">
+    <template if:true={cars}>
+      <div if:false={isShowingSearch}>
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+          <svg class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" aria-hidden="true">
+            <use xlink:href={searchIcon}></use>
+          </svg>
+          <input type="text" id="text-input-id-47" oninput={handleGlobalSearch}
+                 placeholder="Search all..." class="slds-input" ></input>
+        </div>
+      </div>
+      <div>
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+          <lightning-button class="slds-m-left_xx-small" onclick={openAdvancedSearch}
+                            label={advancedSearchText} aria-haspopup="modal">
+          </lightning-button>
+        </div>
+      </div>
+
+      <div class="break"></div>
+      <div if:true={showAdvancedSearch} class="advancedSearch">
+        <c-advanced-search-modal onadvancedsearch={handleAdvancedSearch}></c-advanced-search-modal>
+      </div>
+      
+      <lightning-datatable
+        key-field="Id"
+        columns={columns}
+        data={recordsToDisplay}
+        max-row-selection="1"
+        onrowselection={handleSelectCar}
+        onsort={handleSort}
+        sorted-by={sortedField}
+        sorted-direction={sortDirection}
+      >
+      </lightning-datatable>
+      
+      <div if:false={isEmptyCar} class="slds-var-m-vertical_medium">
+        <c-pagination records={cars} onpagination={handlePagination}>
+        </c-pagination>
+      </div>
+    </template>
+    <template if:true={isEmptyCar}>
+      <div class="slds-text-heading_large slds-align_absolute-center">
+          404 Car Not Found.
+      </div>
+    </template>
+    <template if:true={loading}>
+      <div class="slds-card__body">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+      </div>
+    </template>
+  </div>
+  
+</template>

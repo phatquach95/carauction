@@ -1,0 +1,24 @@
+<template>
+    <lightning-card>
+      <lightning-record-edit-form
+        object-api-name="Auction_Room__c"
+        onsuccess={handleSuccess}
+        onerror={handleError}
+      >
+        <lightning-input-field field-name="Name"></lightning-input-field>
+        <lightning-input-field field-name="Start__c"></lightning-input-field>
+        <lightning-input-field field-name="End__c"></lightning-input-field>
+        <lightning-input-field field-name="Status__c"></lightning-input-field>
+        <div class="slds-align_absolute-center">
+          <lightning-button
+            icon-name="utility:download"
+            variant="success"
+            type="submit"
+            label="Save"
+          >
+          </lightning-button>
+        </div>
+      </lightning-record-edit-form>
+    </lightning-card>
+  </template>
+  

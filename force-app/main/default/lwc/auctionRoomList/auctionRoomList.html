@@ -1,0 +1,109 @@
+<template>
+  <lightning-card
+    variant="Narrow"
+    title={titleText}
+    icon-name="standard:drafts"
+  >
+    <div class="slds-p-horizontal_small">
+      <div if:false={isSelected}>
+        <template
+          if:true={auctionRooms}
+          for:each={auctionRooms}
+          for:item="room"
+          for:index="index"
+        >
+          <div key={room.Id} class="slds-box slds-m-around_x-small">
+            <div>Room name: {room.Name}</div>
+            <div>
+              Start date: 
+              <lightning-formatted-date-time
+                value={room.Start__c}
+                year="numeric"
+                month="numeric"
+                day="numeric"
+                hour="2-digit"
+                minute="2-digit"
+              ></lightning-formatted-date-time>
+            </div>
+            <div>
+              Close date: 
+              <lightning-formatted-date-time
+                value={room.End__c}
+                year="numeric"
+                month="numeric"
+                day="numeric"
+                hour="2-digit"
+                minute="2-digit"
+              ></lightning-formatted-date-time>
+            </div>
+            <div>Number of current slot: {room.Auction_Room_Slot__c}</div>
+            <div>
+              Status: {room.Status__c}
+              <span style={room.statusStyle} class="dot"></span>
+            </div>
+            <div class="slds-m-top_x-small">
+              <lightning-button
+                value={index}
+                variant="brand"
+                label="Choose this room"
+                id={room.Id}
+                onclick={handleChooseRoom}
+              ></lightning-button>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <template if:true={isSelected}>
+        <div
+          class="slds-text-color_success slds-align_absolute-center slds-text-heading_large"
+        >
+          You have selected this auction room.
+        </div>
+        <lightning-record-view-form
+          record-id={selectedRoomId}
+          object-api-name="Auction_Room__c"
+        >
+          <div class="slds-box">
+            <lightning-output-field field-name="Id"></lightning-output-field>
+            <lightning-output-field field-name="Name"></lightning-output-field>
+            <lightning-output-field
+              field-name="Start__c"
+            ></lightning-output-field>
+            <lightning-output-field
+              field-name="End__c"
+            ></lightning-output-field>
+            <lightning-output-field
+              field-name="Auction_Room_Slot__c"
+            ></lightning-output-field>
+            <lightning-output-field
+              field-name="Status__c"
+            ></lightning-output-field>
+            <lightning-input onchange={handleInputPrice} type="number" label="Starting Price" value={startingPrice}></lightning-input>
+          </div>
+        </lightning-record-view-form>
+        <div class="slds-m-top_x-small">
+          <lightning-button
+            label="Cancel"
+            onclick={handleCancelSelected}
+            icon-name="utility:close"
+          ></lightning-button>
+        </div>
+      </template>
+
+      <template if:false={auctionRooms}>
+        <div class="slds-text-heading_medium slds-align_absolute-center">
+          Currently there is no auction room
+        </div>
+      </template>
+      <template if:true={loading}>
+        <div class="slds-card__body slds-card__body_inner">
+          <lightning-spinner
+            alternative-text="Loading"
+            size="large"
+          ></lightning-spinner>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
